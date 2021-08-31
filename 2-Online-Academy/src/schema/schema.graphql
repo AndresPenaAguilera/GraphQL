@@ -55,7 +55,7 @@ type Course{
 enum Level{
     ALL
     NOVATE
-    INTERMEDIO
+    MEDIUM
     EXPERT
 }
 
