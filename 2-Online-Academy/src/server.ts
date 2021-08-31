@@ -4,23 +4,35 @@ import express from "express";
 import compression from "compression";
 import cors from 'cors'
 import { createServer } from "http";
-
+import { ApolloServer } from "apollo-server-express";
+import schema from './schema';
+import expressPlayGround from 'graphql-playground-middleware-express'
 
 const app= express();
 
 app.use('*', cors());
 app.use(compression());
 
-app.get('/',(reg, res) => {
-    res.send('Hello online academy');
+const server = new ApolloServer({
+    schema,
+    introspection:true
 });
 
-const httpServer = createServer(app);
+server.start().then(res=>{
 
-const PORT=5200;
+    server.applyMiddleware({app});
 
-httpServer.listen({
-    port :PORT
-    },
-    ()=>console.log(`Hello world API GraphQL http://localhost:${PORT}`)
-);
+    app.get('/', expressPlayGround({
+        endpoint:'/graphql'
+    }));
+
+    const httpServer = createServer(app);
+
+    const PORT=5200;
+
+    httpServer.listen({
+        port :PORT
+        },
+        ()=>console.log(`Hello world API GraphQL http://localhost:${PORT}`)
+    );
+});
