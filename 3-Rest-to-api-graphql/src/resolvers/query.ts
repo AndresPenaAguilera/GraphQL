@@ -19,11 +19,21 @@ const query: IResolvers = {
                 (data: any) => data.MRData.RaceTable.Races[0]
             );
         }, 
-        async historyDrivers(_:void, __:any, { dataSources }) {
-            return await dataSources.drivers.getDrivers().then(
+        async historyDrivers(_:void, { pageElement , page }, { dataSources }) {
+            return await dataSources.drivers.getDrivers(pageElement, page).then(
                 (data: any) => data.MRData.DriverTable.Drivers
             );
-        }
+        },
+        async driversYear(_:void, { year }, { dataSources }) {
+            return await dataSources.drivers.getDriversByYear(year).then(
+                (data: any) => data.MRData.DriverTable.Drivers
+            );
+        },    
+        async driversYearAndRound(_:void, { year, round }, { dataSources }) {
+            return await dataSources.drivers.getDriversByYearAndRound(year, round).then(
+                (data: any) => data.MRData.DriverTable.Drivers
+            );
+        },        
 
     }
 };
