@@ -13,4 +13,9 @@ export function checkYear(year: String)
     return year;
 }
 
-//export function roundCheck
+export function roundCheck(round: number){
+    if(round>=100){
+        return 1;
+    }
+    return round;
+}
