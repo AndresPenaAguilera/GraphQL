@@ -19,3 +19,10 @@ export function roundCheck(round: number){
     }
     return round;
 }
+
+export function paginationOptions(pageElements: number = -1, page: number = 1){
+    const offset = (page - 1) * pageElements;
+    const limit = pageElements;
+    const filter = `limit=${ limit }&offset=${ offset }`;
+    return filter;
+}

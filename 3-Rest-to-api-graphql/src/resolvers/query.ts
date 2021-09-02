@@ -33,7 +33,30 @@ const query: IResolvers = {
             return await dataSources.drivers.getDriversByYearAndRound(year, round).then(
                 (data: any) => data.MRData.DriverTable.Drivers
             );
-        },        
+        },
+        async driverSelect(_:void, {id} ,{dataSources}){
+            return await dataSources.drivers.getDriver(id).then(
+                (data: any) => data.MRData.DriverTable.Drivers[0]
+            );
+        },
+
+        async seasonPilotsRanking(_: void, { year }, { dataSources }){
+            return await dataSources.drivers.getSeasonPilotsRanking(year).then(
+                (data: any) => data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+            );
+        },
+        async historyCircuits(_: void, { pageElement , page }, { dataSources }){
+            return await dataSources.circuits.getCircuits(pageElement , page).then(
+                (data: any) => data.MRData.CircuitTable.Circuits
+            );
+        },
+        async circuitSelect(_: void, { id }, { dataSources }){
+            return await dataSources.circuits.getCircuitById(id).then(
+                (data: any) => data.MRData.CircuitTable.Circuits[0]
+            );
+        },
+        
+        
 
     }
 };
