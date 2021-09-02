@@ -1,0 +1,98 @@
+
+
+type Query {
+    "Season list of F1. Of 1950 to 2019"
+    seasonsList: [Season!]!
+
+    "Get races list by year. Note that there are only seasons since 1950"
+    racesByYear(year: String!): [Race!]!
+
+    "Select race by year and race number"
+    raceSelect(year: String!, round: Int!): Race
+
+    "Drivers list  of the F1 of all history"
+    historyDrivers(pageElement: Int, page: Int): [Driver!]!
+
+     "Drivers list  of the F1 by year"
+    driversYear(year: String!): [Driver!]!
+    
+    "Drivers list  of the F1 by year and race number"
+    driversYearAndRound(year: String!, round: Int!): [Driver!]!
+    
+    "Select drive by ID"
+    driverSelect(id: String!): Driver
+
+    "driver standings by year"
+    seasonPilotsRanking(year: String!): [DriverStanding!]!
+
+    "history Circuits with pagination"
+    historyCircuits(pageElement: Int, page: Int): [Circuit!]!
+
+    "Select Circuit by ID"
+    circuitSelect(id: String!): Circuit
+}
+
+"Season information"
+type Season{
+    "Season year"
+    year: String!
+    "Wikipedia information"
+    url: String!
+    "Wikipedia information adaptated to movile"
+    urlMovile: String!
+}
+
+type Race{
+    season: String!
+    round: String!
+    url: String!
+    urlMovile: String!
+    name: String!
+    circuit: Circuit!
+    date: String!
+    time: String
+}
+
+type Circuit {
+    id: String!
+    url: String!
+    urlMovile: String!
+    name: String!
+    location: Location!
+}
+
+type Location {
+    lat: String!
+    lng: String!
+    locality: String!
+    country: String!
+}
+
+type Driver {
+    id: String!
+    url: String!
+    urlMovile: String!
+    name: String!
+    dateOfBirth: String!
+    nationality: String!
+    permanentNumber: String
+    code: String
+}
+
+type DriverStanding {
+    position: String!
+    positionText: String!
+    points: String!
+    wins: String!
+    driver: Driver!
+    constructors: [Constructor!]!
+}
+
+type Constructor {
+    id: String!
+    url: String!
+    urlMovile: String!
+    name: String!
+    nationality: String!
+}
+

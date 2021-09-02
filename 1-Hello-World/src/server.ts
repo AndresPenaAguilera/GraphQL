@@ -4,6 +4,7 @@ import cors from "cors";
 import schema from "./schema";
 import { ApolloServer } from 'apollo-server-express'
 import { createServer } from "http";
+import  expressPlayground  from "graphql-playground-middleware-express";
 
 const app = express();
 
@@ -19,6 +20,10 @@ const server = new ApolloServer({
 server.start().then(res=>{
     server.applyMiddleware({ app });
 
+    app.use('/', expressPlayground({
+        endpoint:'/graphql'
+    }));
+
     const PORT = 5300;
     const httpServer = createServer(app);
     
@@ -28,4 +33,5 @@ server.start().then(res=>{
     );
 
 });
+
 
