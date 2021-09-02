@@ -25,7 +25,6 @@ export class CircuitsData extends F1{
         return await this.get(`circuits/${ id }.json?`,{
             cacheOptions:{ttl: 60}
         });
-        
     }
 
     
