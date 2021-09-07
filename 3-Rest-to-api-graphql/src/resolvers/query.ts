@@ -1,7 +1,8 @@
 import { IResolvers } from 'graphql-tools';
 
 const query: IResolvers = {
-    Query: {
+    Query: 
+    {
         async seasonsList(_:void, __: any, { dataSources })
         {
             return await dataSources.seasons.getSeasons().then(
@@ -55,9 +56,6 @@ const query: IResolvers = {
                 (data: any) => data.MRData.CircuitTable.Circuits[0]
             );
         },
-        
-        
-
     }
 };
 
